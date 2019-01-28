@@ -1,0 +1,274 @@
+:root {
+  --material-color: 231, 48%, 48%;
+  --material-foreground-color: 0, 100%, 100%;
+  --surface-color: 0, 100%, 100%;
+  --surface-foreground-color: 0, 100%, 0%;
+}
+
+.button {
+  /* 2. normalization */
+  font-size: inherit;
+
+  /* 3. custom styles */
+  position: relative;
+  overflow: hidden;
+
+  padding: 0.5em 1.25em;
+  border-radius: 2px;
+
+  transition: color 0.15s, background-color 0.15s, box-shadow 0.15s 0.15s;
+}
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px hsla(var(--material-color), 0.24);
+}
+.button::before {
+  pointer-events: none;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.button::after {
+  pointer-events: none;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 50%;
+  opacity: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 1s, transform 0.5s;
+}
+.button:active::after {
+  opacity: 0.32;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+.button:hover::before {
+  opacity: 0.08;
+}
+.button:focus::before {
+  opacity: 0.16;
+}
+.button:focus:hover::before {
+  opacity: 0.24;
+}
+
+.button.primary {
+  background-color: hsl(var(--material-color));
+  color: hsl(var(--material-foreground-color));
+  border: 1px solid transparent;
+}
+.button.primary::before {
+  background-color: hsl(var(--material-foreground-color));
+}
+.button.primary::after {
+  background-color: hsl(var(--material-foreground-color));
+}
+.button.primary:disabled {
+  background-color: hsla(var(--surface-foreground-color), 0.12);
+  color: hsla(var(--surface-foreground-color), 0.38);
+}
+
+.button.secondary {
+  background-color: hsl(var(--surface-color));
+  color: hsl(var(--material-color));
+  border: 1px solid hsl(var(--material-color));
+}
+.button.secondary::before {
+  background-color: hsl(var(--material-color));
+}
+.button.secondary::after {
+  background-color: hsl(var(--material-color));
+}
+.button.secondary:disabled {
+  color: hsla(var(--surface-foreground-color), 0.38);
+  border: 1px solid hsla(var(--surface-foreground-color), 0.12);
+}
+
+.checkbox {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.checkbox + label {
+  position: relative;
+}
+.checkbox + label::before {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  margin: 0 0.5em 0 0;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  background-color: hsl(var(--surface-color));
+  border: 1px solid hsla(var(--surface-foreground-color), 0.64);
+  box-shadow: inset 0 0 0 2px hsl(var(--material-color), 0.24);
+  transition: box-shadow 0.15s, background-color 0.3s;
+}
+.checkbox + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  width: 40px;
+  height: 40px;
+  transform: translate(-25%, -25%) scale(1);
+  opacity: 0;
+  border-radius: 50%;
+  background-color: hsl(var(--surface-foreground-color));
+  transition: opacity 0.15s, transform 0.3s;
+}
+.checkbox:checked + label::before {
+  background-color: hsl(var(--material-color));
+  border-color: hsl(var(--material-color));
+}
+.checkbox:checked + label::after {
+  background-color: hsl(var(--material-color));
+}
+.checkbox:active + label::after {
+  opacity: 1;
+  transform: translate(-25%, -25%) scale(0);
+  transition: transform 0s, opacity 0s;
+}
+.checkbox:hover + label::after {
+  opacity: 0.08;
+}
+.checkbox:focus + label::after {
+  opacity: 0.12;
+}
+.checkbox:focus:hover + label::after {
+  opacity: 0.16;
+}
+.checkbox:disabled + label {
+  color: hsla(var(--surface-foreground-color), 0.38);
+}
+.checkbox:disabled + label::before {
+  border-color: hsla(var(--surface-foreground-color), 0.12);
+  box-shadow: none;
+}
+.checkbox:checked:disabled + label::before {
+  background-color: hsla(var(--surface-foreground-color), 0.12);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.radio {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.radio + label {
+  position: relative;
+}
+.radio + label::before {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  margin: 0 0.5em 0 0;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+  border: 1px solid hsla(var(--surface-foreground-color), 0.64);
+  box-shadow: inset 0 0 0 2px hsl(var(--material-color), 0.24);
+  transition: box-shadow 0.15s, background-color 0.3s;
+}
+.radio + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  width: 40px;
+  height: 40px;
+  transform: translate(-25%, -25%) scale(1);
+  opacity: 0;
+  border-radius: 50%;
+  background-color: hsl(var(--surface-foreground-color));
+  transition: opacity 0.15s, transform 0.3s;
+}
+.radio:checked + label::before {
+  background-color: hsl(var(--material-color));
+  box-shadow: inset 0 0 0 2px hsl(var(--surface-color));
+}
+.radio:checked + label::after {
+  background-color: hsl(var(--material-color));
+}
+.radio:active + label::after {
+  opacity: 1;
+  transform: translate(-25%, -25%) scale(0);
+  transition: transform 0s, opacity 0s;
+}
+.radio:hover + label::after {
+  opacity: 0.08;
+}
+.radio:focus + label::after {
+  opacity: 0.12;
+}
+.radio:focus:hover + label::after {
+  opacity: 0.16;
+}
+.radio:disabled + label {
+  color: hsla(var(--surface-foreground-color), 0.38);
+}
+.radio:disabled + label::before {
+  border-color: hsla(var(--surface-foreground-color), 0.12);
+  box-shadow: none;
+}
+.radio:checked:disabled + label::before {
+  background-color: hsla(var(--surface-foreground-color), 0.12);
+  border-color: transparent;
+  box-shadow: inset 0 0 0 2px hsl(var(--surface-color));
+}
+
+.textfield {
+  /* 1. reset */
+  outline: none;
+
+  /* 2. normalization */
+  font-size: inherit;
+  display: block;
+
+  /* 3. custom styles */
+  padding: 0.5em;
+  border: 1px solid hsl(var(--material-color));
+  border-radius: 2px;
+  background-color: hsl(var(--surface-color));
+  color: hsl(var(--surface-foreground-color));
+
+  transition: box-shadow 0.15s, background-color 0.15s;
+}
+.textfield:hover {
+  background-color: hsla(var(--material-color), 0.08);
+}
+.textfield:focus {
+  background-color: hsl(var(--surface-color));
+  box-shadow: 0 0 0 4px hsla(var(--material-color), 0.24);
+}
+.textfield:disabled {
+  border: 1px solid hsla(var(--surface-foreground-color), 0.12);
+}
